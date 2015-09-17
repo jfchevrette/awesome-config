@@ -84,7 +84,8 @@ mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 700x400 --class=ncmpcpp -e ncmpcpp"
 irc = terminal .. " -e weechat-curses"
 file_manager = "thunar"
-dmenu_args = "-b -i -nb '#1b1918' -sb '#1b1918' -sf '#6666ea' -fn Terminus-9"
+dmenu_args = string.format("-b -i -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
+    beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
 
 local layouts = {
     awful.layout.suit.floating,
@@ -714,4 +715,3 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function()
 end)
 end
 -- }}}
-

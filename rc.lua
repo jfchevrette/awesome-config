@@ -199,9 +199,11 @@ mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
     settings = function()
-        local mpd_notification_preset = {
-            text = string.format("%s\n%s\n%s",
-                mpd_now.artist, mpd_now.album, mpd_now.title)
+        mpd_notification_preset = {
+            title   = "Now playing",
+            timeout = 6,
+            text    = string.format("%s (%s)\n%s", mpd_now.artist,
+                mpd_now.album, mpd_now.title)
         }
 
         local artist = ""

@@ -175,8 +175,8 @@ markup = lain.util.markup
 separators = lain.util.separators
 
 -- Textclock
-datewidget = awful.widget.textclock(" %a %d %b", 60)
-timewidget = awful.widget.textclock(" %H:%M", 60)
+datewidget = awful.widget.textclock("%a %d %b", 60)
+timewidget = awful.widget.textclock("%H:%M", 60)
 
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
@@ -247,10 +247,9 @@ volumewidget = lain.widgets.alsa({
 })
 
 -- Net
- 
 netwidget = lain.widgets.net({
     settings = function()
-        widget:set_markup(markup(beautiful.net_down, " " .. net_now.received)
+        widget:set_markup(markup(beautiful.net_down, net_now.received)
                 .. " " ..
                 markup(beautiful.net_up, net_now.sent))
     end
@@ -306,6 +305,7 @@ for s = 1, screen.count() do
         local arg = { ... }
             right_layout:add(spr)
             right_layout:add(arrl)
+            right_layout:add(spr)
             for i, n in pairs(arg) do
                 right_layout:add(n)
             end

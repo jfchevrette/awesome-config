@@ -57,6 +57,7 @@ run_once("parcellite -n")
 run_once("mpd")
 run_once("mpdscribble")
 run_once("thunar --daemon")
+run_once("unclutter -noevents")
 -- }}}
 
 -- {{{ Variable definitions

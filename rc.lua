@@ -424,7 +424,6 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ altkey, "Control" }, "l",
         function()
             awful.util.spawn_with_shell("mpc sendmessage mpdas love")
-            mpdwidget.update()
         end),
 
     awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),

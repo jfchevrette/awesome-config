@@ -170,25 +170,25 @@ markup = lain.util.markup
 separators = lain.util.separators
 
 -- Textclock
-datewidget = awful.widget.textclock(" %a %d %b ", 60)
+datewidget = awful.widget.textclock(" %a %d %b", 60)
 timewidget = awful.widget.textclock(" %H:%M", 60)
 
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 
 -- Maildir check
-mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
+mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
 mailwidget = wibox.widget.background(misc.widgets.maildir({
     timeout = 60,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
     settings = function()
-        if newmail ~= "no mail " then
-            mailicon:set_markup(markup(beautiful.fg_highlight, ""))
-            widget:set_text(" " .. newmail .. " ")
+        if newmail ~= "no mail" then
+            mailicon:set_markup(markup(beautiful.fg_highlight, ""))
+            widget:set_text(" " .. newmail)
         else
             widget:set_text("")
-            mailicon:set_markup(markup(beautiful.fg_normal, ""))
+            mailicon:set_markup(markup(beautiful.fg_normal, ""))
         end
     end
 }))
@@ -210,11 +210,11 @@ mpdwidget = lain.widgets.mpd({
         local title = ""
         if mpd_now.state == "play" then
             artist = " " .. mpd_now.artist .. " "
-            title = mpd_now.title .. " "
+            title = mpd_now.title
             mpdicon:set_markup(markup(beautiful.fg_highlight, ""))
         elseif mpd_now.state == "pause" then
             artist = " mpd "
-            title = "paused "
+            title = "paused"
         else
             mpdicon:set_markup(markup(beautiful.fg_normal, ""))
         end
@@ -224,31 +224,23 @@ mpdwidget = lain.widgets.mpd({
 })
 
 -- ALSA volume
-volicon = wibox.widget.textbox(markup(beautiful.fg_highlight, ""))
 volumewidget = lain.widgets.alsa({
     settings = function()
         if volume_now.status == "off" then
-            volicon:set_markup(markup(beautiful.fg_normal, ""))
-        elseif tonumber(volume_now.level) == 0 then
-            volicon:set_markup(markup(beautiful.fg_normal, ""))
-        elseif tonumber(volume_now.level) <= 50 then
-            volicon:set_markup(markup(beautiful.fg_normal, ""))
-        else
-            volicon:set_markup(markup(beautiful.fg_normal, ""))
+            widget:set_text(" muted")
         end
 
-        widget:set_text(" " .. volume_now.level .. "% ")
+        widget:set_text(" " .. volume_now.level .. "%")
     end
 })
 
 -- Net
 
-neticon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
 netwidget = lain.widgets.net({
     settings = function()
         widget:set_markup(markup("#7AC82E", " " .. net_now.received)
                 .. " " ..
-                markup("#46A8C3", " " .. net_now.sent .. " "))
+                markup("#46A8C3", net_now.sent))
     end
 })
 
@@ -300,32 +292,23 @@ for s = 1, screen.count() do
     local right_layout_toggle = true
     local function right_layout_add(...)
         local arg = { ... }
-        if right_layout_toggle then
-            right_layout:add(arrl_ld)
-            for i, n in pairs(arg) do
-                right_layout:add(wibox.widget.background(n, beautiful.bg_focus))
-            end
-        else
-            right_layout:add(arrl_dl)
+            right_layout:add(spr)
+            right_layout:add(arrl)
             for i, n in pairs(arg) do
                 right_layout:add(n)
             end
-        end
-        right_layout_toggle = not right_layout_toggle
     end
 
     if s == 1 then
         right_layout:add(wibox.widget.systray())
     end
 
-    right_layout:add(spr)
-    right_layout:add(arrl)
-    right_layout_add(mpdicon, mpdwidget)
-    right_layout_add(mailicon, mailwidget)
+    right_layout_add(spr, mpdicon, mpdwidget)
+    right_layout_add(spr, mailicon, mailwidget)
     right_layout_add(volicon, volumewidget)
-    right_layout_add(neticon, netwidget)
+    right_layout_add(netwidget)
     right_layout_add(datewidget)
-    right_layout_add(timewidget, spr)
+    right_layout_add(timewidget)
     right_layout_add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)

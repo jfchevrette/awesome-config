@@ -189,7 +189,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
     settings = function()
         if newmail ~= "no mail" then
             mailicon:set_markup(markup(beautiful.fg_highlight, beautiful.icon_mail))
-            widget:set_text(newmail)
+            widget:set_text(" " .. newmail)
         else
             widget:set_text("")
             mailicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_mail))

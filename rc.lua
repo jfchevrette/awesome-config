@@ -77,6 +77,7 @@ menubar.show_categories = false
 modkey = "Mod4"
 altkey = "Mod1"
 terminal = "termite" or "xterm"
+terminal_float = terminal .. " --class=float-term --geometry 700x400"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -142,7 +143,7 @@ configmenu = {
 }
 
 awesomemenu = {
-    { "manual", terminal .. " -e man awesome" },
+    { "manual", terminal_float .. " -e 'man awesome'" },
     { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
     { "restart", awesome.restart }
 }
@@ -159,7 +160,7 @@ systemmenu = {
 -- {{{ Menu
 mymainmenu = awful.menu({
     items = {
-        { "terminal", "termite" },
+        { "terminal", terminal_float },
         { "web browser", browser },
         { "social", socialmenu },
         { "dev", devmenu },
@@ -610,6 +611,11 @@ awful.rules.rules = {
     {
         rule = { class = "Gimp" },
         properties = { tag = tags[1][4] }
+    },
+
+    {
+        rule = { class = "float-term" },
+        properties = { floating = true }
     },
 
     {

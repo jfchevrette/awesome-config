@@ -7,6 +7,7 @@ require("eminent.eminent")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
+local menubar = require("menubar")
 local lain = require("lain")
 local misc = require("misc")
 
@@ -50,8 +51,6 @@ function run_once(cmd)
     awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
--- run_once("urxvtd")
--- run_once("gpg-agent --daemon")
 run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")
@@ -69,6 +68,10 @@ os.setlocale(os.getenv("LANG"))
 beautiful.init(home .. "/.config/awesome/themes/leliana/theme.lua")
 naughty.config.defaults.border_width = beautiful.notify_border_width
 naughty.config.defaults.border_color = beautiful.notify_border
+
+menubar.cache_entries = true
+menubar.app_folders = { "/usr/share/applications/", home .. "/.local/share/applications/" }
+menubar.show_categories = false
 
 -- common
 modkey = "Mod4"
@@ -433,8 +436,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
 
+    awful.key({ modkey }, "d", function () menubar.show() end),
+
     -- Prompt
-    awful.key({ modkey }, "d", function() mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "r", function() mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "x",
         function()
             awful.prompt.run({ prompt = "Run Lua code: " },

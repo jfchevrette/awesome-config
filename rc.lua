@@ -55,7 +55,7 @@ run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")
 run_once("mpd")
-run_once("mpdscribble")
+run_once("mpdas -c " .. home.. "/.mpdasrc")
 run_once("thunar --daemon")
 run_once("unclutter -noevents")
 -- }}}
@@ -419,6 +419,11 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ altkey, "Control" }, "Right",
         function()
             awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
+            mpdwidget.update()
+        end),
+    awful.key({ altkey, "Control" }, "l",
+        function()
+            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
             mpdwidget.update()
         end),
 

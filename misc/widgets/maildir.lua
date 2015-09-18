@@ -1,4 +1,3 @@
-
 --[[
                                                   
      Licensed under GNU General Public License v2 
@@ -7,39 +6,41 @@
                                                   
 --]]
 
-local newtimer        = require("lain.helpers").newtimer
+local newtimer = require("lain.helpers").newtimer
 
-local wibox           = require("wibox")
+local wibox = require("wibox")
 
-local util            = require("lain.util")
+local util = require("lain.util")
 
-local io              = { popen  = io.popen }
-local os              = { getenv = os.getenv }
-local pairs           = pairs
-local string          = { len    = string.len,
-                          match  = string.match }
-local table           = { sort   = table.sort }
+local io = { popen = io.popen }
+local os = { getenv = os.getenv }
+local pairs = pairs
+local string = {
+    len = string.len,
+    match = string.match
+}
+local table = { sort = table.sort }
 
-local setmetatable    = setmetatable
+local setmetatable = setmetatable
 
 -- Maildir check
 -- lain.widgets.maildir
 local maildir = {}
 
 local function worker(args)
-    local args         = args or {}
-    local timeout      = args.timeout or 60
-    local mailpath     = args.mailpath or os.getenv("HOME") .. "/Mail"
+    local args = args or {}
+    local timeout = args.timeout or 60
+    local mailpath = args.mailpath or os.getenv("HOME") .. "/Mail"
     local ignore_boxes = args.ignore_boxes or {}
-    local settings     = args.settings or function() end
+    local settings = args.settings or function() end
 
     maildir.widget = wibox.widget.textbox('')
 
     function update()
         -- Find pathes to mailboxes.
         local p = io.popen("find " .. mailpath ..
-                           " -mindepth 1 -maxdepth 2 -type d" ..
-                           " -not -name .git")
+                " -mindepth 1 -maxdepth 2 -type d" ..
+                " -not -name .git")
         local boxes = {}
         repeat
             line = p:read("*l")
@@ -51,8 +52,8 @@ local function worker(args)
                 -- Afterwards the length of this string is the number of
                 -- new mails in that box.
                 local np = io.popen("find " .. line ..
-                                    "/new -mindepth 1 -type f " ..
-                                    "-not -name '.*' -printf a")
+                        "/new -mindepth 1 -type f " ..
+                        "-not -name '.*' -printf a")
                 local mailstring = np:read("*a")
 
                 -- Strip off leading mailpath.
@@ -82,7 +83,7 @@ local function worker(args)
                     newmail = box .. "(" .. number .. ")"
                 else
                     newmail = newmail .. ", " ..
-                              box .. "(" .. number .. ")"
+                            box .. "(" .. number .. ")"
                 end
             end
         end

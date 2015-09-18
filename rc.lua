@@ -177,24 +177,24 @@ timewidget = awful.widget.textclock(" %H:%M", 60)
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 
 -- Maildir check
-mailicon = wibox.widget.imagebox(beautiful.widget_mail)
+mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
 mailwidget = wibox.widget.background(misc.widgets.maildir({
     timeout = 60,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
     settings = function()
-        if newmail ~= "no mail" then
-            mailicon:set_image(beautiful.widget_mail_on)
+        if newmail ~= "no mail " then
+            mailicon:set_markup(markup(beautiful.fg_highlight, ""))
             widget:set_text(" " .. newmail .. " ")
         else
             widget:set_text("")
-            mailicon:set_image(beautiful.widget_mail)
+            mailicon:set_markup(markup(beautiful.fg_normal, ""))
         end
     end
 }))
 
 -- MPD
-mpdicon = wibox.widget.imagebox(beautiful.widget_music)
+mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
@@ -211,30 +211,30 @@ mpdwidget = lain.widgets.mpd({
         if mpd_now.state == "play" then
             artist = " " .. mpd_now.artist .. " "
             title = mpd_now.title .. " "
-            mpdicon:set_image(beautiful.widget_music_on)
+            mpdicon:set_markup(markup(beautiful.fg_highlight, ""))
         elseif mpd_now.state == "pause" then
             artist = " mpd "
             title = "paused "
         else
-            mpdicon:set_image(beautiful.widget_music)
+            mpdicon:set_markup(markup(beautiful.fg_normal, ""))
         end
 
-        widget:set_markup(markup("#EA6F81", artist) .. title)
+        widget:set_markup(markup(beautiful.fg_highlight, artist) .. title)
     end
 })
 
 -- ALSA volume
-volicon = wibox.widget.imagebox(beautiful.widget_vol)
+volicon = wibox.widget.textbox(markup(beautiful.fg_highlight, ""))
 volumewidget = lain.widgets.alsa({
     settings = function()
         if volume_now.status == "off" then
-            volicon:set_image(beautiful.widget_vol_mute)
+            volicon:set_markup(markup(beautiful.fg_normal, ""))
         elseif tonumber(volume_now.level) == 0 then
-            volicon:set_image(beautiful.widget_vol_no)
+            volicon:set_markup(markup(beautiful.fg_normal, ""))
         elseif tonumber(volume_now.level) <= 50 then
-            volicon:set_image(beautiful.widget_vol_low)
+            volicon:set_markup(markup(beautiful.fg_normal, ""))
         else
-            volicon:set_image(beautiful.widget_vol)
+            volicon:set_markup(markup(beautiful.fg_normal, ""))
         end
 
         widget:set_text(" " .. volume_now.level .. "% ")
@@ -242,7 +242,8 @@ volumewidget = lain.widgets.alsa({
 })
 
 -- Net
-neticon = wibox.widget.imagebox(beautiful.widget_net)
+
+neticon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
 netwidget = lain.widgets.net({
     settings = function()
         widget:set_markup(markup("#7AC82E", " " .. net_now.received)

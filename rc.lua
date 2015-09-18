@@ -174,31 +174,31 @@ markup = lain.util.markup
 separators = lain.util.separators
 
 -- Textclock
-datewidget = awful.widget.textclock("%a %d %b", 60)
-timewidget = awful.widget.textclock("%H:%M", 60)
+datewidget = awful.widget.textclock(" %a %d %b", 60)
+timewidget = awful.widget.textclock(" %H:%M", 60)
 
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 
 -- Maildir check
-mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
+mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(misc.widgets.maildir({
     timeout = 60,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
     settings = function()
         if newmail ~= "no mail" then
-            mailicon:set_markup(markup(beautiful.fg_highlight, ""))
+            mailicon:set_markup(markup(beautiful.fg_highlight, beautiful.icon_mail))
             widget:set_text(newmail)
         else
             widget:set_text("")
-            mailicon:set_markup(markup(beautiful.fg_normal, ""))
+            mailicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_mail))
         end
     end
 }))
 
 -- MPD
-mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, ""))
+mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, beautiful.icon_music))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
@@ -215,12 +215,12 @@ mpdwidget = lain.widgets.mpd({
         if mpd_now.state == "play" then
             artist = " " .. mpd_now.artist .. " "
             title = mpd_now.title
-            mpdicon:set_markup(markup(beautiful.fg_highlight, ""))
+            mpdicon:set_markup(markup(beautiful.fg_highlight, beautiful.icon_music))
         elseif mpd_now.state == "pause" then
             artist = " mpd "
             title = "paused"
         else
-            mpdicon:set_markup(markup(beautiful.fg_normal, ""))
+            mpdicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_music))
         end
 
         widget:set_markup(markup(beautiful.fg_highlight, artist) .. title)
@@ -228,11 +228,17 @@ mpdwidget = lain.widgets.mpd({
 })
 
 -- ALSA volume
-volicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
+volicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_sound_high))
 volumewidget = lain.widgets.alsa({
     settings = function()
         if volume_now.status == "off" then
-            widget:set_text(" muted")
+            volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_off))
+        elseif tonumber(volume_now.level) == 0 then
+            volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_low))
+        elseif tonumber(volume_now.level) <= 50 then
+            volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_med))
+        else
+            volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_high))
         end
 
         widget:set_text(" " .. volume_now.level .. "%")

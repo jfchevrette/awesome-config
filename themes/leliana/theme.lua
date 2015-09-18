@@ -3,7 +3,7 @@ theme                               = {}
 themes_dir                          = os.getenv("HOME") .. "/.config/awesome/themes/leliana"
 theme.wallpaper                     = themes_dir .. "/wall.png"
 
-theme.font                          = "Lemon 9"
+theme.font                          = "Lemon"
 theme.fg_normal                     = "#DDDDFF"
 theme.fg_focus                      = "#407ee7"
 theme.fg_highlight                  = "#f22c40"
@@ -49,5 +49,12 @@ theme.tasklist_maximized_horizontal = ""
 theme.tasklist_maximized_vertical   = ""
 
 theme.useless_gap_width = 5
+
+theme.icon_mail = ""
+theme.icon_music = ""
+theme.icon_sound_off = ""
+theme.icon_sound_low = ""
+theme.icon_sound_med = ""
+theme.icon_sound_high = ""
 
 return theme

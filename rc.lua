@@ -434,7 +434,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
 
     -- Prompt
-    awful.key({ modkey }, "r", function() mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "d", function() mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "x",
         function()
             awful.prompt.run({ prompt = "Run Lua code: " },

@@ -198,7 +198,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
 }))
 
 -- MPD
-mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, beautiful.icon_music))
+local mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, beautiful.icon_music))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
@@ -228,7 +228,7 @@ mpdwidget = lain.widgets.mpd({
 })
 
 -- ALSA volume
-volicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_sound_high))
+local volicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_sound_high))
 volumewidget = lain.widgets.alsa({
     settings = function()
         if volume_now.status == "off" then

@@ -239,9 +239,9 @@ volumewidget = lain.widgets.alsa({
 
 netwidget = lain.widgets.net({
     settings = function()
-        widget:set_markup(markup("#7AC82E", " " .. net_now.received)
+        widget:set_markup(markup(beautiful.net_down, " " .. net_now.received)
                 .. " " ..
-                markup("#46A8C3", net_now.sent))
+                markup(beautiful.net_up, net_now.sent))
     end
 })
 

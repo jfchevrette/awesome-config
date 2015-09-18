@@ -55,7 +55,7 @@ run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")
 run_once("mpd")
-run_once("mpdas -c " .. home.. "/.mpdasrc")
+run_once("mpdas -c " .. home .. "/.mpdasrc")
 run_once("thunar --daemon")
 run_once("unclutter -noevents")
 -- }}}

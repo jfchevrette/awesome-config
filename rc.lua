@@ -194,7 +194,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
 }))
 
 -- MPD
-mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, ""))
+mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, ""))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",

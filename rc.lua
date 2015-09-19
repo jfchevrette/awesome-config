@@ -396,6 +396,15 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ "Control", altkey }, "m", function() awful.util.spawn_with_shell(musicplr) end),
     awful.key({ "Control", altkey }, "e", function() awful.util.spawn_with_shell(mail) end),
 
+    -- Start recording (desktop)
+    awful.key({ modkey, altkey }, "r", function() awful.util.spawn_with_shell(home .. "/scripts/screencast -m desktop") end),
+
+    -- Start recording (window)
+    awful.key({ modkey, altkey }, "w", function() awful.util.spawn_with_shell(home .. "/scripts/screencast -m window") end),
+
+    -- Stop recording
+    awful.key({ modkey, altkey }, "x", function() awful.util.spawn("pkill -f 'x11grab'") end),
+
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function()

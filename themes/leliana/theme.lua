@@ -3,7 +3,7 @@ theme                               = {}
 themes_dir                          = os.getenv("HOME") .. "/.config/awesome/themes/leliana"
 theme.wallpaper                     = themes_dir .. "/wall.png"
 
-theme.font                          = "Tewi"
+theme.font                          = "Lemon"
 theme.fg_normal                     = "#DDDDFF"
 theme.fg_focus                      = "#407ee7"
 theme.fg_highlight                  = "#f22c40"

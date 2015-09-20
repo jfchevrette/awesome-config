@@ -227,7 +227,7 @@ mpdwidget = lain.widgets.mpd({
             artist = " mpd "
             title = "paused"
         else
-            mpdicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_music))
+            mpdicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_music))
         end
 
         widget:set_markup(markup(beautiful.fg_urgent, artist) .. title)

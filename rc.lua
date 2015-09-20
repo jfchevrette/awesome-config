@@ -41,6 +41,12 @@ do
 end
 -- }}}
 
+-- disable startup-notification globally
+local oldspawn = awful.util.spawn
+awful.util.spawn = function (s)
+    oldspawn(s, false)
+end
+
 -- {{{ Autostart applications
 function run_once(cmd)
     local findme = cmd

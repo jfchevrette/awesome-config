@@ -60,8 +60,6 @@ end
 run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")
-run_once("mpd")
-run_once("mpdas -d -c " .. home .. "/.mpdasrc")
 run_once("thunar --daemon")
 run_once("unclutter -noevents")
 -- }}}
@@ -205,7 +203,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
 }))
 
 -- MPD
-local mpdicon = wibox.widget.textbox(markup(beautiful.fg_urgent, beautiful.icon_music))
+local mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_music))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
@@ -226,8 +224,9 @@ mpdwidget = lain.widgets.mpd({
         elseif mpd_now.state == "pause" then
             artist = " mpd "
             title = "paused"
-        else
             mpdicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_music))
+        else
+            mpdicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_music))
         end
 
         widget:set_markup(markup(beautiful.fg_urgent, artist) .. title)
@@ -460,10 +459,6 @@ globalkeys = awful.util.table.join(-- Take a screenshot
         function()
             awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
             mpdwidget.update()
-        end),
-    awful.key({ altkey, "Control" }, "l",
-        function()
-            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
         end),
 
     awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),

@@ -195,7 +195,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
     mailpath = home .. "/.mail",
     settings = function()
         if newmail ~= "no mail" then
-            mailicon:set_markup(markup(beautiful.fg_highlight, beautiful.icon_mail))
+            mailicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_mail))
             widget:set_text(" " .. newmail)
         else
             widget:set_text("")
@@ -205,7 +205,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
 }))
 
 -- MPD
-local mpdicon = wibox.widget.textbox(markup(beautiful.fg_highlight, beautiful.icon_music))
+local mpdicon = wibox.widget.textbox(markup(beautiful.fg_urgent, beautiful.icon_music))
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
@@ -222,7 +222,7 @@ mpdwidget = lain.widgets.mpd({
         if mpd_now.state == "play" then
             artist = " " .. mpd_now.artist .. " "
             title = mpd_now.title
-            mpdicon:set_markup(markup(beautiful.fg_highlight, beautiful.icon_music))
+            mpdicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_music))
         elseif mpd_now.state == "pause" then
             artist = " mpd "
             title = "paused"
@@ -230,7 +230,7 @@ mpdwidget = lain.widgets.mpd({
             mpdicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_music))
         end
 
-        widget:set_markup(markup(beautiful.fg_highlight, artist) .. title)
+        widget:set_markup(markup(beautiful.fg_urgent, artist) .. title)
     end
 })
 
@@ -283,7 +283,7 @@ mytaglist.buttons = awful.util.table.join(awful.button({}, 1, awful.tag.viewonly
 -- https://bbs.archlinux.org/viewtopic.php?pid=1195757#p1195757
 function updatelayoutbox(l, s)
     local screen = s or 1
-    l:set_markup(markup(beautiful.fg_highlight, beautiful["layout_" .. awful.layout.getname(awful.layout.get(screen))]))
+    l:set_markup(markup(beautiful.fg_focus, beautiful["layout_" .. awful.layout.getname(awful.layout.get(screen))]))
 end
 
 for s = 1, screen.count() do

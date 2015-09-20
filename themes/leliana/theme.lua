@@ -34,14 +34,12 @@ theme.submenu_icon                  = themes_dir .. "/icons/submenu.png"
 theme.taglist_squares_sel           = themes_dir .. "/icons/square_sel.png"
 theme.taglist_squares_unsel         = themes_dir .. "/icons/square_unsel.png"
 
-theme.layout_tile                   = themes_dir .. "/icons/tile.png"
-theme.layout_uselesstile            = themes_dir .. "/icons/tilegaps.png"
-theme.layout_fairv                  = themes_dir .. "/icons/fairv.png"
-theme.layout_floating               = themes_dir .. "/icons/floating.png"
+theme.layout_tile                   = ""
+theme.layout_uselesstile            = ""
+theme.layout_fairv                  = ""
+theme.layout_floating               = ""
 
 theme.arrl                          = themes_dir .. "/icons/arrl.png"
-theme.arrl_dl                       = themes_dir .. "/icons/arrl_dl.png"
-theme.arrl_ld                       = themes_dir .. "/icons/arrl_ld.png"
 
 theme.tasklist_disable_icon         = true
 theme.tasklist_floating             = ""

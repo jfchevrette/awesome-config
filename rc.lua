@@ -55,7 +55,7 @@ run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")
 run_once("mpd")
-run_once("mpdas -c " .. home .. "/.mpdasrc")
+run_once("mpdas -d -c " .. home .. "/.mpdasrc")
 run_once("thunar --daemon")
 run_once("unclutter -noevents")
 -- }}}
@@ -259,8 +259,6 @@ netwidget = lain.widgets.net({
 spr = wibox.widget.textbox(' ')
 arrl = wibox.widget.imagebox()
 arrl:set_image(beautiful.arrl)
-arrl_dl = separators.arrow_left(beautiful.bg_focus, "alpha")
-arrl_ld = separators.arrow_left("alpha", beautiful.bg_focus)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -271,19 +269,39 @@ mytaglist.buttons = awful.util.table.join(awful.button({}, 1, awful.tag.viewonly
     awful.button({ modkey }, 1, awful.client.movetotag),
     awful.button({}, 3, awful.tag.viewtoggle),
     awful.button({ modkey }, 3, awful.client.toggletag),
+    awful.button({ modkey }, 3, awful.client.toggletag),
     awful.button({}, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
     awful.button({}, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end))
+
+
+-- Writes a string representation of the current layout in a textbox widget
+-- https://bbs.archlinux.org/viewtopic.php?pid=1195757#p1195757
+function updatelayoutbox(l, s)
+    local screen = s or 1
+    l:set_markup(markup(beautiful.fg_highlight, beautiful["layout_" .. awful.layout.getname(awful.layout.get(screen))]))
+end
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
 
-    -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(awful.util.table.join(awful.button({}, 1, function() awful.layout.inc(layouts, 1) end),
-        awful.button({}, 3, function() awful.layout.inc(layouts, -1) end),
-        awful.button({}, 4, function() awful.layout.inc(layouts, 1) end),
-        awful.button({}, 5, function() awful.layout.inc(layouts, -1) end)))
+    -- Create a textbox widget which will contains a short string representing the
+    -- layout we're using.  We need one layoutbox per screen.
+    mylayoutbox[s] = wibox.widget.textbox()
+    updatelayoutbox(mylayoutbox[s], s)
+
+    awful.tag.attached_connect_signal(s, "property::selected", function ()
+        updatelayoutbox(mylayoutbox[s], s)
+    end)
+    awful.tag.attached_connect_signal(s, "property::layout", function ()
+        updatelayoutbox(mylayoutbox[s], s)
+    end)
+
+    mylayoutbox[s]:buttons(awful.util.table.join(
+            awful.button({}, 1, function() awful.layout.inc(layouts, 1) end),
+            awful.button({}, 3, function() awful.layout.inc(layouts, -1) end),
+            awful.button({}, 4, function() awful.layout.inc(layouts, 1) end),
+            awful.button({}, 5, function() awful.layout.inc(layouts, -1) end)))
 
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
@@ -321,7 +339,7 @@ for s = 1, screen.count() do
     right_layout_add(netwidget)
     right_layout_add(datewidget)
     right_layout_add(timewidget)
-    right_layout_add(mylayoutbox[s])
+    right_layout_add(mylayoutbox[s], spr)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()

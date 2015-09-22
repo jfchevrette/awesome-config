@@ -83,11 +83,11 @@ altkey = "Mod1"
 terminal = "termite" or "xterm"
 terminal_float = terminal .. " --class=float-term --geometry 700x400"
 editor = "vim"
-editor_cmd = terminal .. " -e " .. editor
+editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
 browser = "firefox"
-gui_editor = "gvim"
+gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
 mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
@@ -562,7 +562,8 @@ awful.rules.rules = {
             focus = awful.client.focus.filter,
             keys = clientkeys,
             buttons = clientbuttons,
-            size_hints_honor = false
+            size_hints_honor = false,
+            callback = awful.placement.centered
         }
     },
     {
@@ -581,7 +582,17 @@ awful.rules.rules = {
     },
 
     {
+        rule = { class = "vim" },
+        properties = { floating = true }
+    },
+
+    {
         rule = { class = "Thunar" },
+        properties = { floating = true }
+    },
+
+    {
+        rule = { class = "File-roller" },
         properties = { floating = true }
     },
 
@@ -617,12 +628,12 @@ awful.rules.rules = {
 
     {
         rule = { class = "ncmpcpp" },
-        properties = { floating = true, callback = awful.placement.centered }
+        properties = { floating = true }
     },
 
     {
         rule = { class = "mutt" },
-        properties = { floating = true, callback = awful.placement.centered }
+        properties = { floating = true }
     },
 
     {

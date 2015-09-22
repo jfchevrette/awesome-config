@@ -592,7 +592,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "File-roller" },
+        rule = { class = "Xarchiver" },
         properties = { floating = true }
     },
 

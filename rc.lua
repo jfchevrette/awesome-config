@@ -1,4 +1,5 @@
 -- {{{ Required libraries
+require("lfs") 
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -47,15 +48,40 @@ awful.util.spawn = function (s)
     oldspawn(s, false)
 end
 
--- {{{ Autostart applications
-function run_once(cmd)
-    local findme = cmd
-    local firstspace = cmd:find(" ")
-    if firstspace then
-        findme = cmd:sub(0, firstspace - 1)
+-- {{{ Run programm once
+local function processwalker()
+   local function yieldprocess()
+      for dir in lfs.dir("/proc") do
+        -- All directories in /proc containing a number, represent a process
+        if tonumber(dir) ~= nil then
+          local f, err = io.open("/proc/"..dir.."/cmdline")
+          if f then
+            local cmdline = f:read("*all")
+            f:close()
+            if cmdline ~= "" then
+              coroutine.yield(cmdline)
+            end
+          end
+        end
+      end
     end
-    awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
+    return coroutine.wrap(yieldprocess)
 end
+
+local function run_once(process, cmd)
+   assert(type(process) == "string")
+   local regex_killer = {
+      ["+"]  = "%+", ["-"] = "%-",
+      ["*"]  = "%*", ["?"]  = "%?" }
+
+   for p in processwalker() do
+      if p:find(process:gsub("[-+?*]", regex_killer)) then
+     return
+      end
+   end
+   return awful.util.spawn(cmd or process)
+end
+-- }}}
 
 run_once("compton -b")
 run_once("redshift")

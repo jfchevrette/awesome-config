@@ -1,5 +1,5 @@
 -- {{{ Required libraries
-require("lfs") 
+require("lfs")
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -470,22 +470,22 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
         function()
-            awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
+            awful.util.spawn_with_shell("mpc toggle")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Down",
         function()
-            awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
+            awful.util.spawn_with_shell("mpc stop")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Left",
         function()
-            awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
+            awful.util.spawn_with_shell("mpc prev")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Right",
         function()
-            awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
+            awful.util.spawn_with_shell("mpc next")
             mpdwidget.update()
         end),
 

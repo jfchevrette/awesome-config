@@ -48,7 +48,8 @@ awful.util.spawn = function (s)
     oldspawn(s, false)
 end
 
--- {{{ Run programm once
+-- {{{ Run program once
+-- http://awesome.naquadah.org/wiki/Autostart#The_native_lua_way
 local function processwalker()
    local function yieldprocess()
       for dir in lfs.dir("/proc") do
@@ -83,6 +84,7 @@ local function run_once(process, cmd)
 end
 -- }}}
 
+-- {{{ Autostart
 run_once("compton -b")
 run_once("redshift")
 run_once("parcellite -n")

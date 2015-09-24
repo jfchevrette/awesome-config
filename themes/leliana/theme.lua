@@ -5,7 +5,7 @@ theme.wallpaper                     = themes_dir .. "/wall.png"
 
 theme.font                          = "Lemon"
 theme.fg_normal                     = "#DDDDFF"
-theme.fg_focus                      = "#407ee7"
+theme.fg_focus                      = "#5ab738"
 theme.fg_urgent                     = "#f22c40"
 theme.bg_normal                     = "#141414"
 theme.bg_focus                      = "#1b1918"

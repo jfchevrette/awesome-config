@@ -1,6 +1,6 @@
 foreground                          = "#a0a0a0"
 background                          = "#141414"
-black                               = "#0C0C0D"
+black                               = "#1b1918"
 red                                 = "#f22c40"
 darkred                             = "#A60010"
 green                               = "#5ab738"
@@ -14,8 +14,8 @@ darkmagenta                         = "#B450C5"
 cyan                                = "#00ad9c"
 darkcyan                            = "#00685D"
 white                               = "#a8a19f"
-gray                                = "#1b1918"
-lightgray                           = "#f1efee"
+gray                                = "#484848"
+lightgray                           = "#554C49"
 
 theme                               = {}
 
@@ -28,9 +28,9 @@ theme.fg_focus                      = magenta
 theme.fg_urgent                     = red
 theme.bg_normal                     = background
 theme.bg_focus                      = gray
-theme.bg_urgent                     = gray
+theme.bg_urgent                     = lightgray
 theme.border_width                  = "1"
-theme.border_normal                 = foreground
+theme.border_normal                 = gray
 theme.border_focus                  = magenta
 theme.border_marked                 = red
 theme.taglist_fg_focus              = theme.fg_focus

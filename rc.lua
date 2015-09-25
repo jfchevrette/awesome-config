@@ -122,8 +122,8 @@ mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 700x400 --class=ncmpcpp -e ncmpcpp"
 irc = terminal .. " -e weechat-curses"
 file_manager = "thunar"
-dmenu_args = string.format("-b -i -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
-    beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
+dmenu_args = string.format("-b -i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
+    beautiful.fg_normal, beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
 
 local layouts = {
     awful.layout.suit.floating,
@@ -221,7 +221,7 @@ mailwidget = wibox.widget.background(misc.widgets.maildir({
     mailpath = home .. "/.mail",
     settings = function()
         if newmail ~= "no mail" then
-            mailicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_mail))
+            mailicon:set_markup(markup(beautiful.widget_active, beautiful.icon_mail))
             widget:set_text(" " .. newmail)
         else
             widget:set_text("")
@@ -248,16 +248,16 @@ mpdwidget = lain.widgets.mpd({
         if mpd_now.state == "play" then
             artist = " " .. mpd_now.artist .. " "
             title = mpd_now.title
-            mpdicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_music))
+            mpdicon:set_markup(markup(beautiful.widget_active, beautiful.icon_music))
         elseif mpd_now.state == "pause" then
             artist = " mpd "
             title = "paused"
-            mpdicon:set_markup(markup(beautiful.fg_urgent, beautiful.icon_music))
+            mpdicon:set_markup(markup(beautiful.widget_active, beautiful.icon_music))
         else
             mpdicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_music))
         end
 
-        widget:set_markup(markup(beautiful.fg_urgent, artist) .. title)
+        widget:set_markup(markup(beautiful.widget_active, artist) .. title)
     end
 })
 

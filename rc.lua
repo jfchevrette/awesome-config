@@ -620,6 +620,11 @@ awful.rules.rules = {
     },
 
     {
+        rule = { class = "Mumble" },
+        properties = { floating = true }
+    },
+
+    {
         rule = { class = "Xarchiver" },
         properties = { floating = true }
     },

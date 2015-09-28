@@ -1,4 +1,4 @@
-foreground                          = "#a0a0a0"
+foreground                          = "#cccccc"
 background                          = "#141414"
 black                               = "#1b1918"
 red                                 = "#f22c40"

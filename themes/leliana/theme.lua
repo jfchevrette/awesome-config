@@ -1,4 +1,4 @@
-foreground                          = "#cccccc"
+foreground                          = "#CCCCCC"
 background                          = "#141414"
 black                               = "#1b1918"
 red                                 = "#f22c40"
@@ -13,9 +13,9 @@ magenta                             = "#E85B92"
 lightmagenta                        = "#F181AC"
 cyan                                = "#00ad9c"
 lightcyan                           = "#26B3A4"
-white                               = "#a8a19f"
-gray                                = "#484848"
-lightgray                           = "#554C49"
+white                               = "#CCCCCC"
+gray                                = "#2F2F2F"
+lightgray                           = "#747272"
 
 theme                               = {}
 
@@ -25,10 +25,10 @@ theme.wallpaper                     = themes_dir .. "/wall.png"
 theme.font                          = "Lemon"
 theme.fg_normal                     = foreground
 theme.fg_focus                      = magenta
-theme.fg_urgent                     = lightmagenta
+theme.fg_urgent                     = red
 theme.bg_normal                     = background
 theme.bg_focus                      = gray
-theme.bg_urgent                     = background
+theme.bg_urgent                     = lightgray
 theme.border_width                  = "1"
 theme.border_normal                 = gray
 theme.border_focus                  = magenta

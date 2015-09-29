@@ -22,7 +22,7 @@ theme                               = {}
 themes_dir                          = os.getenv("HOME") .. "/.config/awesome/themes/leliana"
 theme.wallpaper                     = themes_dir .. "/wall.png"
 
-theme.font                          = "Lemon"
+theme.font                          = "Tewi"
 theme.fg_normal                     = foreground
 theme.fg_focus                      = magenta
 theme.fg_urgent                     = red

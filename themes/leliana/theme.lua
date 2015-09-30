@@ -73,7 +73,7 @@ theme.icon_sound_low = ""
 theme.icon_sound_med = ""
 theme.icon_sound_high = ""
 
-theme.bar_separator_char = '/'
+theme.bar_separator_char = '∕'
 
 theme.widget_active = magenta
 

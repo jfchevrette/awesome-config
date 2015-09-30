@@ -204,7 +204,6 @@ mymainmenu = awful.menu({
 
 -- {{{ Wibox
 markup = lain.util.markup
-separators = lain.util.separators
 
 -- Textclock
 datewidget = awful.widget.textclock("%a %d %b", 60)
@@ -290,8 +289,8 @@ netwidget = lain.widgets.net({
 
 -- Separators
 spr = wibox.widget.textbox(' ')
-arrl = wibox.widget.imagebox()
-arrl:set_image(beautiful.arrl)
+arrl = wibox.widget.textbox()
+arrl:set_markup(markup(beautiful.bg_urgent, beautiful.bar_separator_char))
 
 -- Create a wibox for each screen and add it
 mywibox = {}

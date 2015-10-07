@@ -29,7 +29,7 @@ theme.fg_urgent                     = red
 theme.bg_normal                     = background
 theme.bg_focus                      = gray
 theme.bg_urgent                     = lightgray
-theme.border_width                  = "1"
+theme.border_width                  = 1
 theme.border_normal                 = gray
 theme.border_focus                  = magenta
 theme.border_marked                 = red
@@ -38,7 +38,7 @@ theme.textbox_widget_margin_top     = 1
 theme.notify_fg                     = theme.fg_normal
 theme.notify_bg                     = theme.bg_normal
 theme.notify_border                 = magenta
-theme.notify_border_width           = theme.border_width
+theme.notify_border_width           = 2
 theme.awful_widget_height           = 14
 theme.awful_widget_margin_top       = 2
 theme.mouse_finder_color            = "#CC9393"
@@ -56,8 +56,6 @@ theme.layout_tile                   = ""
 theme.layout_uselesstile            = ""
 theme.layout_fairv                  = ""
 theme.layout_floating               = ""
-
-theme.arrl                          = themes_dir .. "/icons/arrl.png"
 
 theme.tasklist_disable_icon         = true
 theme.tasklist_floating             = ""

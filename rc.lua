@@ -114,7 +114,7 @@ editor = "vim"
 editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
-browser = "firefox"
+browser = "firejail firefox"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
@@ -288,9 +288,9 @@ netwidget = lain.widgets.net({
 })
 
 -- Separators
-spr = wibox.widget.textbox(' ')
-arrl = wibox.widget.textbox()
-arrl:set_markup(markup(beautiful.bg_urgent, beautiful.bar_separator_char))
+space = wibox.widget.textbox(' ')
+separator = wibox.widget.textbox()
+separator:set_markup(markup(beautiful.bg_urgent, beautiful.bar_separator_char))
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -342,19 +342,19 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the upper left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(spr)
+    left_layout:add(space)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
-    left_layout:add(spr)
+    left_layout:add(space)
 
     -- Widgets that are aligned to the upper right
     local right_layout = wibox.layout.fixed.horizontal()
     local right_layout_toggle = true
     local function right_layout_add(...)
         local arg = { ... }
-            right_layout:add(spr)
-            right_layout:add(arrl)
-            right_layout:add(spr)
+            right_layout:add(space)
+            right_layout:add(separator)
+            right_layout:add(space)
             for i, n in pairs(arg) do
                 right_layout:add(n)
             end
@@ -370,7 +370,7 @@ for s = 1, screen.count() do
     right_layout_add(netwidget)
     right_layout_add(datewidget)
     right_layout_add(timewidget)
-    right_layout_add(mylayoutbox[s], spr)
+    right_layout_add(mylayoutbox[s], space)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -486,6 +486,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
         function()
             awful.util.spawn_with_shell("mpc next")
             mpdwidget.update()
+        end),
+    awful.key({ altkey, "Control" }, "l",
+        function()
+            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
         end),
 
     awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),

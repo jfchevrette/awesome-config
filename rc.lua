@@ -10,7 +10,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local lain = require("lain")
-local misc = require("misc")
 
 local home = os.getenv("HOME")
 local awesomeexit = home .. "/.local/bin/awesomeexit "
@@ -118,7 +117,7 @@ browser = "firejail firefox"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
-mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
+mail = "claws-mail"
 musicplr = terminal .. " --geometry 700x400 --class=ncmpcpp -e ncmpcpp"
 irc = terminal .. " -e weechat-curses"
 file_manager = "thunar"
@@ -211,23 +210,6 @@ timewidget = awful.widget.textclock("%H:%M", 60)
 
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
-
--- Maildir check
-mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
-mailwidget = wibox.widget.background(misc.widgets.maildir({
-    timeout = 60,
-    ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
-    mailpath = home .. "/.mail",
-    settings = function()
-        if newmail ~= "no mail" then
-            mailicon:set_markup(markup(beautiful.widget_active, beautiful.icon_mail))
-            widget:set_text(" " .. newmail)
-        else
-            widget:set_text("")
-            mailicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_mail))
-        end
-    end
-}))
 
 -- MPD
 local mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_music))
@@ -365,7 +347,6 @@ for s = 1, screen.count() do
     end
 
     right_layout_add(mpdicon, mpdwidget)
-    right_layout_add(mailicon, mailwidget)
     right_layout_add(volicon, volumewidget)
     right_layout_add(netwidget)
     right_layout_add(datewidget)
@@ -639,6 +620,11 @@ awful.rules.rules = {
 
     {
         rule = { role = "task_dialog" },
+        properties = { floating = true }
+    },
+
+    {
+        rule = { role = "compose" },
         properties = { floating = true }
     },
 

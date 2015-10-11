@@ -155,7 +155,7 @@ end
 gamesmenu = {
     { "fallout", home .. "/scripts/games/fallout.sh" },
     { "fallout 3", home .. "/scripts/games/fallout3.sh" },
-    { "osu!", home .. "/scripts/games/osu.sh" },
+    { "cube world", home .. "/scripts/games/cubeworld.sh" },
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
 }
 
@@ -184,6 +184,7 @@ systemmenu = {
     { "awesome", awesomemenu },
     { "config", configmenu },
     { "lock", awesomeexit .. "lock" },
+    { "suspend", awesomeexit .. "suspend" },
     { "reboot", awesomeexit .. "reboot" },
     { "shutdown", awesomeexit .. "shutdown" }
 }

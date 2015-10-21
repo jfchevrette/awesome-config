@@ -14,8 +14,8 @@ lightmagenta                        = "#F181AC"
 cyan                                = "#00ad9c"
 lightcyan                           = "#26B3A4"
 white                               = "#CCCCCC"
-gray                                = "#2F2F2F"
-lightgray                           = "#747272"
+gray                                = "#4F4F4F"
+lightgray                           = "#848282"
 
 theme                               = {}
 
@@ -27,8 +27,8 @@ theme.fg_normal                     = foreground
 theme.fg_focus                      = magenta
 theme.fg_urgent                     = red
 theme.bg_normal                     = background
-theme.bg_focus                      = gray
-theme.bg_urgent                     = lightgray
+theme.bg_focus                      = background
+theme.bg_urgent                     = gray
 theme.border_width                  = 1
 theme.border_normal                 = gray
 theme.border_focus                  = magenta

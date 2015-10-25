@@ -8,7 +8,6 @@ require("eminent.eminent")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local menubar = require("menubar")
 local lain = require("lain")
 local misc = require("misc")
 
@@ -101,10 +100,6 @@ beautiful.init(home .. "/.config/awesome/themes/leliana/theme.lua")
 naughty.config.defaults.border_width = beautiful.notify_border_width
 naughty.config.defaults.border_color = beautiful.notify_border
 
-menubar.cache_entries = true
-menubar.app_folders = { "/usr/share/applications/", home .. "/.local/share/applications/" }
-menubar.show_categories = false
-
 -- common
 modkey = "Mod4"
 altkey = "Mod1"
@@ -122,7 +117,7 @@ mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 700x400 --class=ncmpcpp -e ncmpcpp"
 irc = terminal .. " -e weechat-curses"
 file_manager = "thunar"
-dmenu_args = string.format("-b -i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
+dmenu_args = string.format("-i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
     beautiful.fg_normal, beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
 
 local layouts = {
@@ -507,10 +502,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
 
-    awful.key({ modkey }, "d", function () menubar.show() end),
+    awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
 
     -- Prompt
-    awful.key({ modkey }, "r", function() mypromptbox[mouse.screen]:run() end),
+	awful.key({ modkey }, "r", function() awful.util.spawn_with_shell('rofi -show run') end),
     awful.key({ modkey }, "x",
         function()
             awful.prompt.run({ prompt = "Run Lua code: " },

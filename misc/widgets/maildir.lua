@@ -11,9 +11,10 @@ local newtimer = require("lain.helpers").newtimer
 local wibox = require("wibox")
 
 local util = require("lain.util")
+local awful = require("awful")
 
 local io = { popen = io.popen }
-local os = { getenv = os.getenv }
+local os = { getenv = os.getenv, exec = os.execute }
 local pairs = pairs
 local string = {
     len = string.len,
@@ -37,6 +38,7 @@ local function worker(args)
     maildir.widget = wibox.widget.textbox('')
 
     function update()
+        awful.util.spawn('mbsync -q ndev revthefox foxbnc foxdev') 
         -- Find pathes to mailboxes.
         local p = io.popen("find " .. mailpath ..
                 " -mindepth 1 -maxdepth 2 -type d" ..

@@ -76,7 +76,7 @@ local function run_once(process, cmd)
 
    for p in processwalker() do
       if p:find(process:gsub("[-+?*]", regex_killer)) then
-     return
+          return
       end
    end
    return awful.util.spawn(cmd or process)
@@ -85,7 +85,7 @@ end
 
 -- {{{ Autostart
 run_once("compton -b")
-run_once("redshift")
+-- run_once("redshift")
 run_once("parcellite -n")
 run_once("thunar --daemon")
 run_once("unclutter -noevents")
@@ -157,6 +157,7 @@ gamesmenu = {
 devmenu = {
     { "android studio", "android-studio" },
     { "intellij idea", "idea-ultimate" },
+    { "virt-manager", "virt-manager" },
 }
 
 socialmenu = {
@@ -383,7 +384,7 @@ root.buttons(awful.util.table.join(awful.button({}, 3, function() mymainmenu:tog
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(-- Take a screenshot
-    awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/scripts/screenbash.sh screenshot") end),
+    awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/.local/bin/screenbash -s") end),
     awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. "lock") end),
 
     -- By direction client focus
@@ -488,7 +489,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             awful.util.spawn_with_shell("mpc sendmessage mpdas love")
         end),
 
-    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
+    awful.key({ modkey }, "p", function() awful.util.spawn(home .. "/.local/bin/passmenu " .. dmenu_args, false) end),
     awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),
 
 
@@ -600,6 +601,10 @@ awful.rules.rules = {
 
     {
         rule = { class = "Catfish" },
+        properties = { floating = true }
+    },
+    {
+        rule = { class = "Virt-manager" },
         properties = { floating = true }
     },
 

@@ -87,7 +87,6 @@ end
 run_once("compton -b")
 -- run_once("redshift")
 run_once("parcellite -n")
-run_once("thunar --daemon")
 run_once("unclutter -noevents")
 -- }}}
 
@@ -109,7 +108,7 @@ editor = "vim"
 editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
-browser = "firejail firefox"
+browser = "firefox"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
@@ -212,7 +211,7 @@ lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 -- Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(misc.widgets.maildir({
-    timeout = 60,
+    timeout = 180,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
     settings = function()

@@ -34,11 +34,15 @@ local function worker(args)
     local mailpath = args.mailpath or os.getenv("HOME") .. "/Mail"
     local ignore_boxes = args.ignore_boxes or {}
     local settings = args.settings or function() end
+    local ext_mail_cmd = args.external_mail_cmd
 
     maildir.widget = wibox.widget.textbox('')
 
     function update()
-        awful.util.spawn('mbsync -q ndev revthefox foxbnc foxdev') 
+        if ext_mail_cmd ~= nil
+        then
+            awful.util.spawn(ext_mail_cmd)
+        end
         -- Find pathes to mailboxes.
         local p = io.popen("find " .. mailpath ..
                 " -mindepth 1 -maxdepth 2 -type d" ..

@@ -155,7 +155,7 @@ gamesmenu = {
 
 devmenu = {
     { "android studio", "android-studio" },
-    { "intellij idea", "idea-ultimate" },
+    { "intellij idea", "idea-community" },
     { "virt-manager", "virt-manager" },
 }
 
@@ -203,7 +203,7 @@ markup = lain.util.markup
 
 -- Textclock
 datewidget = awful.widget.textclock("%a %d %b", 60)
-timewidget = awful.widget.textclock("%H:%M", 60)
+timewidget = awful.widget.textclock("%H:%M:%S", 1)
 
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
@@ -211,9 +211,10 @@ lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 -- Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(misc.widgets.maildir({
-    timeout = 180,
+    timeout = 300,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
+    external_mail_cmd = "mbsync -q ndev revthefox foxbnc foxdev",
     settings = function()
         if newmail ~= "no mail" then
             mailicon:set_markup(markup(beautiful.widget_active, beautiful.icon_mail))
@@ -505,7 +506,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
 
     -- Prompt
-	awful.key({ modkey }, "r", function() awful.util.spawn_with_shell('rofi -show run') end),
+    awful.key({ modkey }, "r", function() awful.util.spawn_with_shell('rofi -show run') end),
     awful.key({ modkey }, "x",
         function()
             awful.prompt.run({ prompt = "Run Lua code: " },
@@ -770,6 +771,41 @@ client.connect_signal("focus",
 client.connect_signal("unfocus",
     function(c)
         c.border_color = beautiful.border_normal
+    end)
+-- }}}
+
+-- {{{ No DPMS for fullscreen clients
+local fullscreened_clients = {}
+
+local function remove_client(tabl, c)
+    local index = awful.util.table.hasitem(tabl, c)
+    if index then
+        table.remove(tabl, index)
+        if #tabl == 0 then
+            awful.util.spawn("xset s on")
+            awful.util.spawn("xset +dpms")
+        end
+    end
+end
+
+client.connect_signal("property::fullscreen",
+    function(c)
+        if c.fullscreen then
+            table.insert(fullscreened_clients, c)
+            if #fullscreened_clients == 1 then
+                awful.util.spawn("xset s off")
+                awful.util.spawn("xset -dpms")
+            end
+        else
+            remove_client(fullscreened_clients, c)
+        end
+    end)
+
+client.connect_signal("unmanage",
+    function(c)
+        if c.fullscreen then
+            remove_client(fullscreened_clients, c)
+        end
     end)
 -- }}}
 

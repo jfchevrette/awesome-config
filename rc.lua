@@ -9,7 +9,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local lain = require("lain")
-local misc = require("misc")
 
 local home = os.getenv("HOME")
 local awesomeexit = home .. "/.local/bin/awesomeexit "
@@ -210,7 +209,7 @@ lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 
 -- Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
-mailwidget = wibox.widget.background(misc.widgets.maildir({
+mailwidget = wibox.widget.background(lain.widgets.maildir({
     timeout = 300,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",

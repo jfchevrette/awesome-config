@@ -86,7 +86,6 @@ end
 run_once("compton -b")
 -- run_once("redshift")
 run_once("parcellite -n")
-run_once("unclutter -noevents")
 -- }}}
 
 -- {{{ Variable definitions
@@ -107,7 +106,7 @@ editor = "vim"
 editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
-browser = "firefox"
+browser = "chromium"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
@@ -177,6 +176,7 @@ awesomemenu = {
 systemmenu = {
     { "awesome", awesomemenu },
     { "config", configmenu },
+    { "logout", awesome.quit },
     { "lock", awesomeexit .. "lock" },
     { "suspend", awesomeexit .. "suspend" },
     { "reboot", awesomeexit .. "reboot" },
@@ -210,7 +210,7 @@ lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 -- Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(lain.widgets.maildir({
-    timeout = 300,
+    timeout = 180,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
     external_mail_cmd = "mbsync -q ndev revthefox foxbnc foxdev",
@@ -673,7 +673,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Firefox" },
+        rule = { class = "Chromium" },
         properties = { tag = tags[1][1] }
     },
 
@@ -704,15 +704,16 @@ awful.rules.rules = {
 
 -- {{{ Signals
 -- signal function to execute when a new client appears.
-local sloppyfocus_last = { c = nil }
+-- local sloppyfocus_last = { c = nil }
 client.connect_signal("manage", function(c, startup)
-    -- enable sloppy focus
+    --[[ enable sloppy focus
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
                 and awful.client.focus.filter(c) then
             client.focus = c
         end
     end)
+    --]]
 
     if not startup and not c.size_hints.user_position
             and not c.size_hints.program_position then

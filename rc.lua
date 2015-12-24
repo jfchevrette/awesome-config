@@ -106,7 +106,7 @@ editor = "vim"
 editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
-browser = "chromium"
+browser = "firefox"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
@@ -383,7 +383,7 @@ root.buttons(awful.util.table.join(awful.button({}, 3, function() mymainmenu:tog
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(-- Take a screenshot
-    awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/.local/bin/screenbash -s") end),
+    awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/.local/bin/pstepw -s") end),
     awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. "lock") end),
 
     -- By direction client focus
@@ -673,7 +673,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Chromium" },
+        rule = { class = "Firefox" },
         properties = { tag = tags[1][1] }
     },
 

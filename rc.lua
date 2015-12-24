@@ -147,8 +147,8 @@ end
 gamesmenu = {
     { "fallout", home .. "/scripts/games/fallout.sh" },
     { "fallout 3", home .. "/scripts/games/fallout3.sh" },
-    { "cube world", home .. "/scripts/games/cubeworld.sh" },
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
+    { "morrowind", "openmw-launcher" },
 }
 
 devmenu = {

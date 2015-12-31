@@ -1,5 +1,5 @@
 foreground                          = "#BBBBBB"
-background                          = "#141414"
+background                          = "#0B0B0B"
 black                               = "#1b1918"
 red                                 = "#f22c40"
 lightred                            = "#F85262"

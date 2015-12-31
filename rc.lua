@@ -110,8 +110,8 @@ browser = "firefox"
 gui_editor = editor_cmd
 telegram = "telegram"
 graphics = "gimp"
-mail = terminal .. " --geometry 700x400 --class=mutt -e mutt"
-musicplr = terminal .. " --geometry 700x400 --class=ncmpcpp -e ncmpcpp"
+mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
+musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
 irc = terminal .. " -e weechat-curses"
 file_manager = "thunar"
 dmenu_args = string.format("-i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",

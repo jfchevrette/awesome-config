@@ -84,7 +84,6 @@ end
 
 -- {{{ Autostart
 run_once("compton -b")
--- run_once("redshift")
 run_once("parcellite -n")
 -- }}}
 
@@ -106,13 +105,13 @@ editor = "vim"
 editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
 
 -- user defined
-browser = "firefox"
+browser = "firejail firefox"
 gui_editor = editor_cmd
-telegram = "telegram"
+telegram = "firejail telegram"
 graphics = "gimp"
 mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
-irc = terminal .. " -e weechat-curses"
+irc = terminal .. " -e firejail weechat-curses"
 file_manager = "thunar"
 dmenu_args = string.format("-i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
     beautiful.fg_normal, beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
@@ -145,22 +144,8 @@ end
 -- }}}
 
 gamesmenu = {
-    { "fallout", home .. "/scripts/games/fallout.sh" },
-    { "fallout 3", home .. "/scripts/games/fallout3.sh" },
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
     { "morrowind", "openmw-launcher" },
-}
-
-devmenu = {
-    { "android studio", "android-studio" },
-    { "intellij idea", "idea-community" },
-    { "virt-manager", "virt-manager" },
-}
-
-socialmenu = {
-    { "telegram", telegram },
-    { "irc", irc },
-    { "teamspeak", "teamspeak3" },
 }
 
 configmenu = {
@@ -189,8 +174,6 @@ mymainmenu = awful.menu({
     items = {
         { "terminal", terminal_float },
         { "web browser", browser },
-        { "social", socialmenu },
-        { "dev", devmenu },
         { "games", gamesmenu },
         { "system", systemmenu }
     }

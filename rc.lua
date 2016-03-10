@@ -444,8 +444,23 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             awful.util.spawn("amixer -q set Master 1%-")
             volumewidget.update()
         end),
+    awful.key({}, "XF86AudioRaiseVolume",
+        function()
+            awful.util.spawn("amixer -q set Master 1%+")
+            volumewidget.update()
+        end),
+    awful.key({}, "XF86AudioLowerVolume",
+        function()
+            awful.util.spawn("amixer -q set Master 1%-")
+            volumewidget.update()
+        end),
 
     -- MPD control
+    awful.key({}, "XF86AudioPlay",
+        function()
+            awful.util.spawn_with_shell("mpc toggle")
+            mpdwidget.update()
+        end),
     awful.key({ altkey, "Control" }, "Up",
         function()
             awful.util.spawn_with_shell("mpc toggle")
@@ -476,6 +491,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
 
     -- User programs
+    awful.key({}, 'XF86Calculator', function() awful.util.spawn('galculator') end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "g", function() awful.util.spawn(graphics) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),

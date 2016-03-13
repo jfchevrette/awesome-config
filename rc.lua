@@ -481,10 +481,6 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             awful.util.spawn_with_shell("mpc next")
             mpdwidget.update()
         end),
-    awful.key({ altkey, "Control" }, "l",
-        function()
-            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
-        end),
 
     awful.key({ modkey }, "p", function() awful.util.spawn(home .. "/.local/bin/passmenu " .. dmenu_args, false) end),
     awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),
@@ -500,11 +496,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey }, "i", function() awful.util.spawn(irc) end),
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
-
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
-
-    -- Prompt
     awful.key({ modkey }, "r", function() awful.util.spawn_with_shell('rofi -show run') end),
+
+    -- Run a small prompt to execute Lua within Awesome's Lua runtime
     awful.key({ modkey }, "x",
         function()
             awful.prompt.run({ prompt = "Run Lua code: " },
@@ -598,16 +593,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Catfish" },
-        properties = { floating = true }
-    },
-    {
         rule = { class = "Virt-manager" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Gvim" },
         properties = { floating = true }
     },
 
@@ -705,15 +691,6 @@ awful.rules.rules = {
 -- signal function to execute when a new client appears.
 -- local sloppyfocus_last = { c = nil }
 client.connect_signal("manage", function(c, startup)
-    --[[ enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                and awful.client.focus.filter(c) then
-            client.focus = c
-        end
-    end)
-    --]]
-
     if not startup and not c.size_hints.user_position
             and not c.size_hints.program_position then
         awful.placement.no_overlap(c)

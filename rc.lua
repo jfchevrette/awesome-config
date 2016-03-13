@@ -106,12 +106,9 @@ editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. 
 
 -- user defined
 browser = "firejail firefox"
-gui_editor = editor_cmd
 telegram = "firejail telegram"
-graphics = "gimp"
 mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
-irc = terminal .. " -e firejail weechat-curses"
 file_manager = "thunar"
 dmenu_args = string.format("-i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
     beautiful.fg_normal, beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
@@ -489,11 +486,8 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     -- User programs
     awful.key({}, 'XF86Calculator', function() awful.util.spawn('galculator') end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
-    awful.key({ modkey }, "g", function() awful.util.spawn(graphics) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
-    awful.key({ modkey }, "e", function() awful.util.spawn(gui_editor) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
-    awful.key({ modkey }, "i", function() awful.util.spawn(irc) end),
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),

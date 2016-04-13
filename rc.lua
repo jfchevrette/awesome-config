@@ -190,10 +190,10 @@ lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 -- Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(lain.widgets.maildir({
-    timeout = 180,
+    timeout = 300,
     ignore_boxes = { "Drafts", "Junk", "Sent", "Trash" },
     mailpath = home .. "/.mail",
-    external_mail_cmd = "mbsync -q ndev revthefox foxbnc foxdev",
+--    external_mail_cmd = "mbsync -q ndev revthefox foxbnc foxdev",
     settings = function()
         if newmail ~= "no mail" then
             mailicon:set_markup(markup(beautiful.widget_active, beautiful.icon_mail))
@@ -364,6 +364,7 @@ root.buttons(awful.util.table.join(awful.button({}, 3, function() mymainmenu:tog
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/.local/bin/pstepw -s") end),
+    awful.key({ }, "Print", function() awful.util.spawn(home .. "/.local/bin/pstepw") end),
     awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. "lock") end),
 
     -- By direction client focus
@@ -415,7 +416,19 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
     -- Standard program
     awful.key({ modkey, }, "Return", function() awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Shift" }, "r", awesome.restart),
+
+    -- Restart if config checks out, error notification otherwise
+    awful.key({ modkey, "Shift" }, "r",
+        function()
+            local err = awful.util.restart()
+            if err ~= nil then
+                naughty.notify({
+                    preset = naughty.config.presets.critical,
+                    title = "Oops, your config contains errors!",
+                    text = err
+                })
+            end
+        end),
 
     -- Widgets
     awful.key({ "Control", altkey }, "m", function() awful.util.spawn_with_shell(musicplr) end),

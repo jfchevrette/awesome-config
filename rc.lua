@@ -110,8 +110,7 @@ telegram = "firejail telegram"
 mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
 file_manager = "thunar"
-dmenu_args = string.format("-i -nf '%s' -nb '%s' -sb '%s' -sf '%s' -fn '%s'",
-    beautiful.fg_normal, beautiful.bg_normal, beautiful.bg_focus, beautiful.fg_focus, beautiful.font)
+dmenu_args = "-i"
 
 local layouts = {
     awful.layout.suit.floating,

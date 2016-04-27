@@ -465,6 +465,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
         end),
 
     -- MPD control
+    awful.key({ altkey, "Control" }, "l",
+        function()
+            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
+        end),
     awful.key({}, "XF86AudioPlay",
         function()
             awful.util.spawn_with_shell("mpc toggle")

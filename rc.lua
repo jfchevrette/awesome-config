@@ -504,6 +504,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
+    awful.key({ modkey, "Mod1" }, "m", function() awful.util.spawn('/opt/MessengerForDesktop/Messenger') end),
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),

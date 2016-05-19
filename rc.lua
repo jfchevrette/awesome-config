@@ -339,12 +339,14 @@ for s = 1, screen.count() do
         right_layout:add(wibox.widget.systray())
     end
 
-    right_layout_add(mpdicon, mpdwidget)
-    right_layout_add(mailicon, mailwidget)
-    right_layout_add(volicon, volumewidget)
-    right_layout_add(netwidget)
-    right_layout_add(datewidget)
-    right_layout_add(timewidget)
+    if s == 1 then
+        right_layout_add(mpdicon, mpdwidget)
+        right_layout_add(mailicon, mailwidget)
+        right_layout_add(volicon, volumewidget)
+        right_layout_add(netwidget)
+        right_layout_add(datewidget)
+        right_layout_add(timewidget)
+    end
     right_layout_add(mylayoutbox[s], space)
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -671,6 +673,11 @@ awful.rules.rules = {
     {
         rule = { class = "Firefox" },
         properties = { tag = tags[1][1] }
+    },
+
+    {
+        rule = { class = "telegram" },
+        properties = { tag = tags[2][1] }
     },
 
     {

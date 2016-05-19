@@ -417,6 +417,8 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
     -- Standard program
     awful.key({ modkey, }, "Return", function() awful.util.spawn(terminal) end),
+    awful.key({modkey, }, "F1", function () awful.screen.focus(1) end),
+    awful.key({modkey, }, "F2", function () awful.screen.focus(2) end),
 
     -- Restart if config checks out, error notification otherwise
     awful.key({ modkey, "Shift" }, "r",

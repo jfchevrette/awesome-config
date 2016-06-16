@@ -209,6 +209,7 @@ local mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_
 mpdwidget = lain.widgets.mpd({
     music_dir = home .. "/music",
     cover_size = "50",
+    notify = "off",
     settings = function()
         mpd_notification_preset = {
             title   = "Now playing",

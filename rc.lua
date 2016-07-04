@@ -15,6 +15,11 @@ local awesomeexit = home .. "/.local/bin/awesomeexit "
 
 -- }}}
 
+naughty.config.notify_callback = function(args)
+    args.screen = mouse.screen
+    return args
+end
+
 -- {{{ Error handling
 if awesome.startup_errors then
     naughty.notify({

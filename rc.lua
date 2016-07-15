@@ -114,7 +114,7 @@ browser = "firejail firefox"
 telegram = "firejail telegram"
 mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
 musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
-file_manager = "thunar"
+file_manager = terminal .. " --geometry 1000x600 --class=ranger -e ranger"
 dmenu_args = "-i"
 
 local layouts = {
@@ -622,7 +622,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Thunar" },
+        rule = { class = "ranger" },
         properties = { floating = true }
     },
 

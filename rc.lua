@@ -104,17 +104,17 @@ naughty.config.defaults.border_color = beautiful.notify_border
 -- common
 modkey = "Mod4"
 altkey = "Mod1"
-terminal = "termite" or "xterm"
-terminal_float = terminal .. " --class=float-term --geometry 700x400"
+terminal = "st" or "xterm"
+terminal_float = terminal .. " -c float-term -g 700x400"
 editor = "vim"
-editor_cmd = terminal .. " --geometry 1000x600 --class=" .. editor .. " -e " .. editor
+editor_cmd = terminal .. " -g 1000x600 -c " .. editor .. " -e " .. editor
 
 -- user defined
 browser = "firejail firefox"
 telegram = "firejail telegram"
-mail = terminal .. " --geometry 1000x600 --class=mutt -e mutt"
-musicplr = terminal .. " --geometry 1000x600 --class=ncmpcpp -e ncmpcpp"
-file_manager = terminal .. " --geometry 1000x600 --class=ranger -e ranger"
+mail = terminal .. " -g 1000x600 -c mutt -e mutt"
+musicplr = terminal .. " -g 1000x600 -c ncmpcpp -e ncmpcpp"
+file_manager = terminal .. " -g 1000x600 -c ranger -e ranger"
 dmenu_args = "-i"
 
 local layouts = {
@@ -508,11 +508,10 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
 
     -- User programs
-    awful.key({}, 'XF86Calculator', function() awful.util.spawn('galculator') end),
+    awful.key({}, 'XF86Calculator', function() awful.util.spawn('mate-calc') end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
-    awful.key({ modkey, "Mod1" }, "m", function() awful.util.spawn('/opt/MessengerForDesktop/Messenger') end),
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
@@ -633,11 +632,6 @@ awful.rules.rules = {
 
     {
         rule = { class = "Xarchiver" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Galculator" },
         properties = { floating = true }
     },
 

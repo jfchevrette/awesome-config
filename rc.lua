@@ -707,13 +707,25 @@ awful.rules.rules = {
 
 -- {{{ Signals
 -- signal function to execute when a new client appears.
--- local sloppyfocus_last = { c = nil }
+local sloppyfocus_last = { c = nil }
 client.connect_signal("manage", function(c, startup)
     if not startup and not c.size_hints.user_position
             and not c.size_hints.program_position then
         awful.placement.no_overlap(c)
         awful.placement.no_offscreen(c)
     end
+
+    -- Enable sloppy focus
+    client.connect_signal("mouse::enter", function(c)
+         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+            and awful.client.focus.filter(c) then
+             -- Skip focusing the client if the mouse wasn't moved.
+             if c ~= sloppyfocus_last.c then
+                 client.focus = c
+                 sloppyfocus_last.c = c
+             end
+         end
+    end)
 
     local titlebars_enabled = false
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then

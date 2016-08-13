@@ -104,17 +104,17 @@ naughty.config.defaults.border_color = beautiful.notify_border
 -- common
 modkey = "Mod4"
 altkey = "Mod1"
-terminal = "st" or "xterm"
-terminal_float = terminal .. " -c float-term -g 700x400"
+terminal = "xterm"
+terminal_float = terminal .. " -class float-term -geometry 160x50"
 editor = "vim"
-editor_cmd = terminal .. " -g 1000x600 -c " .. editor .. " -e " .. editor
+editor_cmd = terminal .. " -geometry 160x50 -class " .. editor  .. editor
 
 -- user defined
 browser = "firejail firefox"
 telegram = "firejail telegram"
-mail = terminal .. " -g 1000x600 -c mutt -e mutt"
-musicplr = terminal .. " -g 1000x600 -c ncmpcpp -e ncmpcpp"
-file_manager = terminal .. " -g 1000x600 -c ranger -e ranger"
+mail = terminal .. " -geometry 160x50 -class mutt mutt"
+musicplr = terminal .. " -geometry 160x50 -class ncmpcpp ncmpcpp"
+file_manager = "pcmanfm"
 dmenu_args = "-i"
 
 local layouts = {
@@ -146,7 +146,6 @@ end
 
 gamesmenu = {
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
-    { "morrowind", "openmw-launcher" },
 }
 
 configmenu = {
@@ -621,7 +620,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "ranger" },
+        rule = { class = "Pcmanfm" },
         properties = { floating = true }
     },
 

@@ -110,7 +110,7 @@ editor = "vim"
 editor_cmd = terminal .. " -geometry 160x50 -class " .. editor  .. editor
 
 -- user defined
-browser = "firejail firefox"
+browser = "firejail chromium"
 telegram = "firejail telegram"
 mail = terminal .. " -geometry 160x50 -class mutt mutt"
 musicplr = terminal .. " -geometry 160x50 -class ncmpcpp ncmpcpp"
@@ -670,7 +670,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Firefox" },
+        rule = { class = "Chromium" },
         properties = { tag = tags[1][1] }
     },
 

@@ -645,7 +645,7 @@ awful.rules.rules = {
     },
 
     {
-        rule_any = { role = { "pop-up" } }, except = { instance = "web.telegram.org"},
+        rule = { role = "pop-up" }, except = { instance = "web.telegram.org"},
         properties = { floating = true }
     },
 
@@ -675,7 +675,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "chromium-browser-chromium" },
+        rule = { class = "chromium-browser-chromium" }, except = { instance = "web.telegram.org" },
         properties = { tag = tags[1][1] }
     },
 

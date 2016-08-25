@@ -111,7 +111,7 @@ editor_cmd = terminal .. " -geometry 160x50 -class " .. editor  .. editor
 
 -- user defined
 browser = "firejail chromium"
-telegram = "firejail telegram"
+telegram = "firejail chromium --app=https://web.telegram.org"
 mail = terminal .. " -geometry 160x50 -class mutt mutt"
 musicplr = terminal .. " -geometry 160x50 -class ncmpcpp ncmpcpp"
 file_manager = "pcmanfm"
@@ -640,7 +640,12 @@ awful.rules.rules = {
     },
 
     {
-        rule = { role = "pop-up" },
+        rule = { instance = "web.telegram.org" },
+        properties = { tag = tags[2][1] }
+    },
+
+    {
+        rule_any = { role = { "pop-up" } }, except = { instance = "web.telegram.org"},
         properties = { floating = true }
     },
 
@@ -670,13 +675,8 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "Chromium" },
+        rule = { class = "chromium-browser-chromium" },
         properties = { tag = tags[1][1] }
-    },
-
-    {
-        rule = { class = "telegram" },
-        properties = { tag = tags[2][1] }
     },
 
     {

@@ -104,16 +104,16 @@ naughty.config.defaults.border_color = beautiful.notify_border
 -- common
 modkey = "Mod4"
 altkey = "Mod1"
-terminal = "xterm"
-terminal_float = terminal .. " -class float-term -geometry 160x50"
+terminal = "urxvt"
+terminal_float = terminal .. " -name float-term -geometry 160x50"
 editor = "vim"
-editor_cmd = terminal .. " -geometry 160x50 -class " .. editor  .. editor
+editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. editor
 
 -- user defined
 browser = "firejail chromium"
 telegram = "firejail chromium --app=https://web.telegram.org"
-mail = terminal .. " -geometry 160x50 -class mutt mutt"
-musicplr = terminal .. " -geometry 160x50 -class ncmpcpp ncmpcpp"
+mail = terminal .. " -geometry 160x50 -name mutt -e mutt"
+musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
 file_manager = "pcmanfm"
 dmenu_args = "-i"
 
@@ -665,12 +665,12 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "ncmpcpp" },
+        rule = { name = "ncmpcpp" },
         properties = { floating = true }
     },
 
     {
-        rule = { class = "mutt" },
+        rule = { name = "mutt" },
         properties = { floating = true }
     },
 
@@ -690,7 +690,7 @@ awful.rules.rules = {
     },
 
     {
-        rule = { class = "float-term" },
+        rule = { name = "float-term" },
         properties = { floating = true }
     },
 

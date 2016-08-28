@@ -110,8 +110,8 @@ editor = "vim"
 editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. editor
 
 -- user defined
-browser = "firejail chromium"
-telegram = "firejail chromium --app=https://web.telegram.org"
+browser = "firejail chromium --disable-component-extensions-with-background-pages"
+telegram = browser .. " --app=https://web.telegram.org"
 mail = terminal .. " -geometry 160x50 -name mutt -e mutt"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
 file_manager = "pcmanfm"

@@ -501,6 +501,11 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             awful.util.spawn_with_shell("mpc next")
             mpdwidget.update()
         end),
+    awful.key({ altkey, "Control" }, "c",
+        function()
+            awful.util.spawn_with_shell("mpc clear")
+            mpdwidget.update()
+        end),
 
     awful.key({ modkey }, "p", function() awful.util.spawn(home .. "/.local/bin/passmenu " .. dmenu_args, false) end),
     awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),

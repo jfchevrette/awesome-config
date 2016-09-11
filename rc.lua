@@ -609,74 +609,10 @@ awful.rules.rules = {
             callback = awful.placement.centered
         }
     },
-    {
-        rule = { class = "mpv" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Virt-manager" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "vim" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Pcmanfm" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Mumble" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Xarchiver" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { role = "task_dialog" },
-        properties = { floating = true }
-    },
 
     {
         rule = { instance = "web.telegram.org" },
         properties = { tag = tags[2][1] }
-    },
-
-    {
-        rule = { role = "pop-up" }, except = { instance = "web.telegram.org"},
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Pinentry-gtk-2" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { name = "Minecraft*" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { class = "Sxiv" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { name = "ncmpcpp" },
-        properties = { floating = true }
-    },
-
-    {
-        rule = { name = "mutt" },
-        properties = { floating = true }
     },
 
     {
@@ -686,7 +622,7 @@ awful.rules.rules = {
 
     {
         rule = { instance = "plugin-container" },
-        properties = { tag = tags[1][1], floating = true }
+        properties = { tag = tags[1][1] }
     },
 
     {
@@ -695,16 +631,24 @@ awful.rules.rules = {
     },
 
     {
-        rule = { name = "float-term" },
-        properties = { floating = true }
-    },
-
-    {
         rule = { class = "Gimp", role = "gimp-image-window" },
         properties = {
             maximized_horizontal = true,
             maximized_vertical = true
         }
+    },
+
+    -- Floating clients
+    {
+        rule_any = {
+            class = { "mpv", "Qbittorrent", "vim", "Pcmanfm", "feh", "Xarchiver", "Pinentry-gtk-2", "Sxiv" },
+            name = { "float-term", "mutt", "Minecraft*", "ncmpcpp" },
+            role = { "task_dialog", "pop-up" },
+            type = { "dialog" },
+            instance = { "plugin-container" }
+        },
+        except = { instance = "web.telegram.org"},
+        properties = { floating = true }
     },
 }
 -- }}}

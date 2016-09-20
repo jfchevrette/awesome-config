@@ -190,7 +190,7 @@ timewidget = awful.widget.textclock("%H:%M:%S", 1)
 -- calendar
 lain.widgets.calendar:attach(datewidget, { font_size = 10 })
 
--- Maildir check
+--[[ Maildir check
 mailicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_mail))
 mailwidget = wibox.widget.background(lain.widgets.maildir({
     timeout = 300,
@@ -207,6 +207,7 @@ mailwidget = wibox.widget.background(lain.widgets.maildir({
         end
     end
 }))
+--]]
 
 -- MPD
 local mpdicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_music))
@@ -345,7 +346,7 @@ for s = 1, screen.count() do
     end
 
     right_layout_add(mpdicon, mpdwidget)
-    right_layout_add(mailicon, mailwidget)
+    -- right_layout_add(mailicon, mailwidget)
     right_layout_add(volicon, volumewidget)
     right_layout_add(netwidget)
     right_layout_add(datewidget)

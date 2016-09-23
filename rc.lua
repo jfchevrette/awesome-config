@@ -112,7 +112,7 @@ editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. edit
 -- user defined
 browser = "firejail chromium --disable-async-dns --disable-component-extensions-with-background-pages"
 telegram = browser .. " --app=https://web.telegram.org"
-mail = terminal .. " -geometry 160x50 -name mutt -e mutt"
+mail = "firejail thunderbird"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
 file_manager = "pcmanfm"
 dmenu_args = "-i"
@@ -533,7 +533,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
 clientkeys = awful.util.table.join(awful.key({ modkey, "Shift" }, "f", function(c) c.fullscreen = not c.fullscreen end),
     awful.key({ modkey, "Shift" }, "q", function(c) c:kill() end),
-    awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle),
+    awful.key({ "Control" }, "space", awful.client.floating.toggle),
     awful.key({ modkey, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey, }, "o", awful.client.movetoscreen),
     awful.key({ modkey, }, "m",
@@ -619,6 +619,11 @@ awful.rules.rules = {
     {
         rule = { class = "chromium-browser-chromium" }, except = { instance = "web.telegram.org" },
         properties = { tag = tags[1][1] }
+    },
+
+    {
+        rule = { class = "Thunderbird" },
+        properties = { tag = tags[1][2] }
     },
 
     {

@@ -146,6 +146,7 @@ end
 
 gamesmenu = {
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
+    { "morrowind", "openmw-launcher" },
 }
 
 configmenu = {

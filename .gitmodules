@@ -1,6 +1,6 @@
 [submodule "lain"]
 	path = lain
-	url = https://github.com/TheReverend403/lain.git
+	url = https://github.com/copycat-killer/lain
 [submodule "eminent"]
 	path = eminent
 	url = git://github.com/guotsuan/eminent.git

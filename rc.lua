@@ -110,8 +110,8 @@ editor = "vim"
 editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. editor
 
 -- user defined
-browser = "firejail chromium --disable-async-dns --disable-component-extensions-with-background-pages"
-telegram = browser .. " --app=https://web.telegram.org"
+browser = "firejail chromium"
+telegram = "firejail telegram"
 mail = "firejail thunderbird"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
 file_manager = "pcmanfm"
@@ -613,12 +613,12 @@ awful.rules.rules = {
     },
 
     {
-        rule = { instance = "web.telegram.org" },
+        rule_any = { instance = { "web.telegram.org" }, class = { "telegram" } },
         properties = { tag = tags[2][1] }
     },
 
     {
-        rule = { class = "chromium-browser-chromium" }, except = { instance = "web.telegram.org" },
+        rule_any = { class = { "chromium-browser-chromium", "Firefox" } }, except = { instance = "web.telegram.org" },
         properties = { tag = tags[1][1] }
     },
 

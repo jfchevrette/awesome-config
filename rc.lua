@@ -110,7 +110,7 @@ editor = "vim"
 editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. editor
 
 -- user defined
-browser = "firejail chromium"
+browser = "firejail firefox"
 telegram = "firejail telegram"
 mail = "firejail thunderbird"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
@@ -136,13 +136,13 @@ for s = 1, screen.count() do
 end
 -- }}}
 
---[[ {{{ Wallpaper
+-- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}} ]]
+-- }}}`
 
 gamesmenu = {
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
@@ -242,21 +242,21 @@ mpdwidget = lain.widgets.mpd({
     end
 })
 
--- ALSA volume
+-- Pulse volume
 local volicon = wibox.widget.textbox(markup(beautiful.fg_normal, beautiful.icon_sound_high))
-volumewidget = lain.widgets.alsa({
+volumewidget = lain.widgets.pulseaudio({
     settings = function()
-        if volume_now.status == "off" then
+        if volume_now.muted == "yes" then
             volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_off))
-        elseif tonumber(volume_now.level) == 0 then
+        elseif tonumber(volume_now.left) == 0 then
             volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_low))
-        elseif tonumber(volume_now.level) <= 50 then
+        elseif tonumber(volume_now.left) <= 50 then
             volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_med))
         else
             volicon:set_markup(markup(beautiful.fg_normal, beautiful.icon_sound_high))
         end
 
-        widget:set_text(" " .. volume_now.level .. "%")
+        widget:set_text(" " .. volume_now.left .. "%")
     end
 })
 
@@ -451,25 +451,25 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     -- Stop recording
     awful.key({ modkey, altkey }, "x", function() awful.util.spawn("pkill -f 'x11grab'") end),
 
-    -- ALSA volume control
+    -- Volume control
     awful.key({ altkey }, "Up",
         function()
-            awful.util.spawn("amixer -q set Master 1%+")
+            awful.util.spawn("pactl set-sink-volume 0 +1%")
             volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function()
-            awful.util.spawn("amixer -q set Master 1%-")
+            awful.util.spawn("pactl set-sink-volume 0 -1%")
             volumewidget.update()
         end),
     awful.key({}, "XF86AudioRaiseVolume",
         function()
-            awful.util.spawn("amixer -q set Master 1%+")
+            awful.util.spawn("pactl set-sink-volume 0 +1%")
             volumewidget.update()
         end),
     awful.key({}, "XF86AudioLowerVolume",
         function()
-            awful.util.spawn("amixer -q set Master 1%-")
+            awful.util.spawn("pactl set-sink-volume 0 +1%")
             volumewidget.update()
         end),
 
@@ -509,7 +509,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             mpdwidget.update()
         end),
 
-    awful.key({ modkey }, "p", function() awful.util.spawn(home .. "/.local/bin/passmenu " .. dmenu_args, false) end),
+    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
     awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),
 
 

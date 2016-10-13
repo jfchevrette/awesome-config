@@ -113,6 +113,7 @@ editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. edit
 browser = "firejail firefox"
 telegram = "firejail telegram"
 mail = "firejail thunderbird"
+irc = terminal .. " -name weechat -e weechat"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
 file_manager = "pcmanfm"
 dmenu_args = "-i"
@@ -136,13 +137,13 @@ for s = 1, screen.count() do
 end
 -- }}}
 
---[[ {{{ Wallpaper
+-- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}} ]]
+-- }}}
 
 gamesmenu = {
     { "minecraft", "java -jar " .. home .. "/.minecraft/Minecraft.jar" },
@@ -439,17 +440,8 @@ globalkeys = awful.util.table.join(-- Take a screenshot
         end),
 
     -- Widgets
-    awful.key({ "Control", altkey }, "m", function() awful.util.spawn_with_shell(musicplr) end),
-    awful.key({ "Control", altkey }, "e", function() awful.util.spawn_with_shell(mail) end),
-
-    -- Start recording (desktop)
-    awful.key({ modkey, altkey }, "r", function() awful.util.spawn_with_shell(home .. "/scripts/screencast -m desktop") end),
-
-    -- Start recording (window)
-    awful.key({ modkey, altkey }, "w", function() awful.util.spawn_with_shell(home .. "/scripts/screencast -m window") end),
-
-    -- Stop recording
-    awful.key({ modkey, altkey }, "x", function() awful.util.spawn("pkill -f 'x11grab'") end),
+    awful.key({ "Control", altkey }, "m", function() awful.util.spawn(musicplr) end),
+    awful.key({ "Control", altkey }, "e", function() awful.util.spawn(mail) end),
 
     -- ALSA volume control
     awful.key({ altkey }, "Up",
@@ -518,6 +510,8 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
+    awful.key({ modkey }, "i", function() awful.util.spawn(irc) end),
+
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
     awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
@@ -625,6 +619,11 @@ awful.rules.rules = {
     {
         rule = { class = "Thunderbird" },
         properties = { tag = tags[1][2] }
+    },
+
+    {
+        rule = { name = "weechat" },
+        properties = { tag = tags[2][2] }
     },
 
     {

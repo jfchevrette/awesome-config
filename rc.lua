@@ -794,3 +794,13 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function()
 end)
 end
 -- }}}
+
+-- Stop new clients being urgent by default
+client.disconnect_signal("request::activate", awful.ewmh.activate)
+function awful.ewmh.activate(c)
+    if c:isvisible() then
+        client.focus = c
+        c:raise()
+    end
+end
+client.connect_signal("request::activate", awful.ewmh.activate)

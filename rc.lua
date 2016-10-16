@@ -89,7 +89,6 @@ end
 
 -- {{{ Autostart
 run_once("compton -b")
-run_once("parcellite -n")
 -- }}}
 
 -- {{{ Variable definitions

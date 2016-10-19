@@ -460,22 +460,22 @@ globalkeys = awful.util.table.join(
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function()
-            awful.util.spawn("amixer -q set Master 1%+")
+            awful.util.spawn("amixer -q set Master 1dB+")
             volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function()
-            awful.util.spawn("amixer -q set Master 1%-")
+            awful.util.spawn("amixer -q set Master 1dB-")
             volumewidget.update()
         end),
     awful.key({}, "XF86AudioRaiseVolume",
         function()
-            awful.util.spawn("amixer -q set Master 1%+")
+            awful.util.spawn("amixer -q set Master 1dB+")
             volumewidget.update()
         end),
     awful.key({}, "XF86AudioLowerVolume",
         function()
-            awful.util.spawn("amixer -q set Master 1%-")
+            awful.util.spawn("amixer -q set Master 1dB-")
             volumewidget.update()
         end),
 

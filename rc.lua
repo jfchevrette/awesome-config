@@ -380,9 +380,12 @@ root.buttons(awful.util.table.join(awful.button({}, 3, function() mymainmenu:tog
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = awful.util.table.join(-- Take a screenshot
-    awful.key({ modkey }, "s", function() awful.util.spawn(home .. "/.local/bin/pstepw -s") end),
-    awful.key({ }, "Print", function() awful.util.spawn(home .. "/.local/bin/pstepw") end),
+globalkeys = awful.util.table.join(
+    -- Take a screenshot
+    awful.key({ modkey }, "s", function() awful.util.spawn("pstepw -s") end),
+    awful.key({}, "Print", function() awful.util.spawn("pstepw") end),
+
+    -- Screen locker
     awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. "lock") end),
 
     -- By direction client focus
@@ -432,7 +435,7 @@ globalkeys = awful.util.table.join(-- Take a screenshot
     awful.key({ modkey, "Mod1" }, "Down", function() awful.client.incwfact(0.05) end),
     awful.key({ modkey, "Mod1" }, "Up", function() awful.client.incwfact(-0.05) end),
 
-    -- Standard program
+    -- Terminal and display switch
     awful.key({ modkey, }, "Return", function() awful.util.spawn(terminal) end),
     awful.key({modkey, }, "F1", function () awful.screen.focus(1) end),
     awful.key({modkey, }, "F2", function () awful.screen.focus(2) end),
@@ -512,12 +515,12 @@ globalkeys = awful.util.table.join(-- Take a screenshot
             mpdwidget.update()
         end),
 
-    awful.key({ modkey }, "p", function() awful.util.spawn(home .. "/.local/bin/passmenu " .. dmenu_args, false) end),
+    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
     awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),
 
 
     -- User programs
-    awful.key({}, 'XF86Calculator', function() awful.util.spawn('mate-calc') end),
+    awful.key({}, 'XF86Calculator', function() awful.util.spawn("mate-calc") end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
@@ -525,8 +528,8 @@ globalkeys = awful.util.table.join(-- Take a screenshot
 
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey }, "d", function () awful.util.spawn_with_shell('rofi -show run') end),
-    awful.key({ modkey }, "r", function() awful.util.spawn_with_shell('rofi -show run') end),
+    awful.key({ modkey }, "d", function () awful.util.spawn_with_shell("rofi -show run") end),
+    awful.key({ modkey }, "r", function() awful.util.spawn_with_shell("rofi -show run") end),
 
     -- Run a small prompt to execute Lua within Awesome's Lua runtime
     awful.key({ modkey }, "x",

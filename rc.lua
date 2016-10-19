@@ -184,6 +184,17 @@ mymainmenu = awful.menu({
 -- {{{ Wibox
 markup = lain.util.markup
 
+-- Weather
+weatherwidget = lain.widgets.weather({
+    city_id = 2647400,
+    followmouse = true,
+    settings = function()
+        descr = weather_now["weather"][1]["description"]:lower()
+        units = math.floor(weather_now["main"]["temp"])
+        widget:set_markup(markup(beautiful.fg_normal, descr .. " @ " .. units .. "°C"))
+    end
+})
+
 -- Textclock
 datewidget = awful.widget.textclock("%a %d %b", 60)
 timewidget = awful.widget.textclock("%H:%M:%S", 1)
@@ -350,6 +361,7 @@ for s = 1, screen.count() do
     -- right_layout_add(mailicon, mailwidget)
     right_layout_add(volicon, volumewidget)
     right_layout_add(netwidget)
+    right_layout_add(weatherwidget)
     right_layout_add(datewidget)
     right_layout_add(timewidget)
     right_layout_add(mylayoutbox[s], space)

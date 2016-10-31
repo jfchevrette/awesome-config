@@ -87,10 +87,6 @@ local function run_once(process, cmd)
 end
 -- }}}
 
--- {{{ Autostart
-run_once("compton -b")
--- }}}
-
 -- {{{ Variable definitions
 -- localization
 os.setlocale(os.getenv("LANG"))
@@ -621,7 +617,7 @@ awful.rules.rules = {
     },
 
     {
-        rule_any = { instance = { "web.telegram.org" }, class = { "telegram" } },
+        rule_any = { instance = { "web.telegram.org" }, class = { "TelegramDesktop" } },
         properties = { tag = tags[2][1] }
     },
 

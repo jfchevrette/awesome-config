@@ -160,7 +160,6 @@ systemmenu = {
     { "config", configmenu },
     { "logout", awesome.quit },
     { "lock", awesomeexit .. "lock" },
-    { "suspend", awesomeexit .. "suspend" },
     { "reboot", awesomeexit .. "reboot" },
     { "shutdown", awesomeexit .. "shutdown" }
 }

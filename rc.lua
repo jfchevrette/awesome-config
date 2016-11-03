@@ -477,36 +477,44 @@ globalkeys = awful.util.table.join(
     -- MPD control
     awful.key({ altkey, "Control" }, "l",
         function()
-            awful.util.spawn_with_shell("mpc sendmessage mpdas love")
+            awful.util.spawn("mpc sendmessage mpdas love")
         end),
     awful.key({}, "XF86AudioPlay",
         function()
-            awful.util.spawn_with_shell("mpc toggle")
+            awful.util.spawn("mpc toggle")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Up",
         function()
-            awful.util.spawn_with_shell("mpc toggle")
+            awful.util.spawn("mpc toggle")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Down",
         function()
-            awful.util.spawn_with_shell("mpc stop")
+            awful.util.spawn("mpc stop")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Left",
         function()
-            awful.util.spawn_with_shell("mpc prev")
+            awful.util.spawn("mpc prev")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Right",
         function()
-            awful.util.spawn_with_shell("mpc next")
+            awful.util.spawn("mpc next")
             mpdwidget.update()
+        end),
+    awful.key({ altkey }, "Right",
+        function()
+            awful.util.spawn("mpc seek +1%")
+        end),
+    awful.key({ altkey }, "Left",
+        function()
+            awful.util.spawn("mpc seek -1%")
         end),
     awful.key({ altkey, "Control" }, "c",
         function()
-            awful.util.spawn_with_shell("mpc clear")
+            awful.util.spawn("mpc clear")
             mpdwidget.update()
         end),
 

@@ -11,7 +11,7 @@ local naughty = require("naughty")
 local lain = require("lain")
 
 local home = os.getenv("HOME")
-local awesomeexit = home .. "/.local/bin/awesomeexit "
+local awesomeexit = home .. "/.local/bin/awesomeexit"
 
 -- }}}
 
@@ -102,10 +102,10 @@ altkey = "Mod1"
 terminal = "urxvt"
 terminal_float = terminal .. " -name float-term -geometry 160x50"
 editor = "vim"
-editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. ' -e ' .. editor
+editor_cmd = terminal .. " -geometry 160x50 -name " .. editor  .. " -e " .. editor
 
 -- user defined
-browser = "firejail firefox"
+browser = "firejail " .. os.getenv("BROWSER")
 telegram = "firejail telegram"
 mail = "firejail thunderbird"
 irc = terminal .. " -name weechat -e weechat"
@@ -159,9 +159,9 @@ systemmenu = {
     { "awesome", awesomemenu },
     { "config", configmenu },
     { "logout", awesome.quit },
-    { "lock", awesomeexit .. "lock" },
-    { "reboot", awesomeexit .. "reboot" },
-    { "shutdown", awesomeexit .. "shutdown" }
+    { "lock", awesomeexit .. " lock" },
+    { "reboot", awesomeexit .. " reboot" },
+    { "shutdown", awesomeexit .. " shutdown" }
 }
 
 
@@ -381,7 +381,7 @@ globalkeys = awful.util.table.join(
     awful.key({}, "Print", function() awful.util.spawn("pstepw") end),
 
     -- Screen locker
-    awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. "lock") end),
+    awful.key({ modkey }, "l", function() awful.util.spawn(awesomeexit .. " lock") end),
 
     -- By direction client focus
     awful.key({ modkey }, "Down",
@@ -518,21 +518,17 @@ globalkeys = awful.util.table.join(
             mpdwidget.update()
         end),
 
-    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
-    awful.key({ modkey, "Control" }, "p", function() awful.util.spawn("passmenu --type " .. dmenu_args, false) end),
-
-
     -- User programs
-    awful.key({}, 'XF86Calculator', function() awful.util.spawn("mate-calc") end),
+    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
     awful.key({ modkey }, "i", function() awful.util.spawn(irc) end),
+    awful.key({ modkey }, "d", function () awful.util.spawn_with_shell("rofi -show run") end),
 
+    -- Layout cycling
     awful.key({ modkey, }, "space", function() awful.layout.inc(layouts, 1) end),
     awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey }, "d", function () awful.util.spawn_with_shell("rofi -show run") end),
-    awful.key({ modkey }, "r", function() awful.util.spawn_with_shell("rofi -show run") end),
 
     -- Run a small prompt to execute Lua within Awesome's Lua runtime
     awful.key({ modkey }, "x",
@@ -543,10 +539,10 @@ globalkeys = awful.util.table.join(
                 awful.util.getdir("cache") .. "/history_eval")
         end))
 
-clientkeys = awful.util.table.join(awful.key({ modkey, "Shift" }, "f", function(c) c.fullscreen = not c.fullscreen end),
+clientkeys = awful.util.table.join(
+    awful.key({ modkey, "Shift" }, "f", function(c) c.fullscreen = not c.fullscreen end),
     awful.key({ modkey, "Shift" }, "q", function(c) c:kill() end),
     awful.key({ "Control" }, "space", awful.client.floating.toggle),
-    awful.key({ modkey, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey, }, "o", awful.client.movetoscreen),
     awful.key({ modkey, }, "m",
         function(c)

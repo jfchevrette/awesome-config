@@ -611,7 +611,7 @@ awful.rules.rules = {
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
-            focus = false,
+            focus = awful.client.focus.filter,
             keys = clientkeys,
             buttons = clientbuttons,
             size_hints_honor = false,
@@ -626,7 +626,7 @@ awful.rules.rules = {
 
     {
         rule_any = { class = { "chromium-browser-chromium", "Firefox" } }, except = { instance = "web.telegram.org" },
-        properties = { tag = tags[1][1] }
+        properties = { tag = tags[1][1], focus = false }
     },
 
     {

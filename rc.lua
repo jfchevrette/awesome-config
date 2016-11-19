@@ -110,7 +110,7 @@ telegram = "firejail telegram"
 mail = "firejail thunderbird"
 irc = terminal .. " -name weechat -e weechat"
 musicplr = terminal .. " -geometry 160x50 -name ncmpcpp -e ncmpcpp"
-file_manager = "pcmanfm"
+file_manager = terminal .. " -geometry 160x50 -name ranger -e ranger"
 dmenu_args = "-i"
 
 local layouts = {
@@ -661,7 +661,7 @@ awful.rules.rules = {
     {
         rule_any = {
             class = { "mpv", "Qbittorrent", "vim", "Pcmanfm", "feh", "Xarchiver", "Pinentry-gtk-2", "Sxiv" },
-            name = { "float-term", "mutt", "Minecraft*", "ncmpcpp" },
+            name = { "float-term", "mutt", "Minecraft*", "ncmpcpp", "ranger" },
             role = { "task_dialog", "pop-up" },
             type = { "dialog" },
             instance = { "plugin-container" }

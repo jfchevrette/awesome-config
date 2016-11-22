@@ -519,7 +519,7 @@ globalkeys = awful.util.table.join(
         end),
 
     -- User programs
-    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. dmenu_args, false) end),
+    awful.key({ modkey }, "p", function() awful.util.spawn("passmenu " .. " -p 'passmenu:' " .. dmenu_args, false) end),
     awful.key({ modkey }, "b", function() awful.util.spawn(browser) end),
     awful.key({ modkey }, "f", function() awful.util.spawn(file_manager) end),
     awful.key({ modkey }, "t", function() awful.util.spawn(telegram) end),
